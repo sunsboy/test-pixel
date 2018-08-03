@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1.0" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="apple-mobile-web-app-title" content="flex 固定 其他自适应问题"/>
+		<link rel="apple-touch-icon-precomposed" href=""/>
+		<title>flex 固定 其他自适应问题 </title>
+		<style>
+			/* 在 flex 布局中 如果 一个元素给定宽度 其他的 元素 自适应 用剩下的宽度  / flex: 1、2、3 比列来分配宽度时，
+			 * 自适应的元素 需要加一个 width: 0 
+			 * 问题： box-orient 为完善！
+			 * 所有需要按照比例分解的列，都加上 width: 0%; 已经有固定值的列不需要加，原理不懂。
+			         反正这个应该是CSS3新属性  box-orient  没有完善的原因
+			 * */
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			.container {
+				/*width: 100%;*/
+				width: 1000px;
+				background: #F93;
+				display: -moz-box;
+				display: -webkit-box;
+				display: flex;
+				display: -webkit-flex;
+				box-orient: horizontal;
+				-moz-box-orient: horizontal;
+				-webkit-box-orient: horizontal;
+			}
+			.container:last-child{
+				width: 600px;
+				margin-top: 20px;
+			}
+			.col1 {
+				background: #FCC;
+				width: 200px;
+			}
+			.col2 {
+				background: #F63;
+				box-flex: 1;
+				flex: 1;
+				-webkit-box-flex: 1;
+				-moz-box-flex: 1;
+				background:#F63;
+				/*width: 0%;*/
+			}
+			.col3 {
+				background: #690;
+				box-flex: 3;
+				flex: 3;
+				-webkit-box-flex: 3;
+				-moz-box-flex: 3;
+				/*width: 0%;*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="container">
+				<div class="col1">在 flex 布局中 如果 一个元素给定宽度 其他的 元素 自适应 用剩下的宽度</div>
+				<div class="col2">
+					<h3>flex 布局</h3>
+					<p>所有需要按照比例分解的列，都加上 width: 0%; 已经有固定值的列不需要加，原理不懂</p>
+				</div>
+				<div class="col3">CSS3新属性  box-orient  没有完善的原因</div>
+			</div>
+			<div class="container">
+				<div class="col1">在 flex 布局中 如果 一个元素给定宽度 其他的 元素 自适应 用剩下的宽度</div>
+				<div class="col2">
+					<h3>flex 布局</h3>
+					<p>所有需要按照比例分解的列，都加上 width: 0%; 已经有固定值的列不需要加，原理不懂</p>
+				</div>
+				<div class="col3">CSS3新属性  box-orient  没有完善的原因</div>
+			</div>
+	</body>
+</html>

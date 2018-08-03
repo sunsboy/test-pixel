@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1.0" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title>1px边框</title>
+		<style>
+			/* 这样是无法实现 移动端 1px 边框线 */
+			@meida (-webkit-min-device-pixel-ratio: 2) {
+				.pixel{
+					border-width: 0.5px;
+					background: #00a381;
+				}
+			}	
+			.div{
+				width: 80%;
+				height: 100px;
+				margin: 10px auto;
+			}
+			/* 方法1 */
+			.pixel{
+				background: #00a497;
+				border: 1px solid red;
+			}
+			.pixel_light{
+				border-width: 0.5px;
+			}
+			/* 方法2 */
+			.pixel-shadow{
+				background: pink;
+				box-shadow: inset 0px -1px 1px -1px #000;
+			}
+			/* 方法3 */
+			.test3{
+				position: relative;
+				margin-top: 10px;
+				border: none;
+				background: #FFCCCC;
+			}
+			.test3:after{
+				content: '';
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				right: auto;
+				top: auto;
+				width: 100%;
+				height: 1px;
+				background: #000;
+				transform: scaleY(.5);
+				-webkit-transform: scaleY(.5);
+				transform-origin: 0 0;
+				-webkit-transform-origin: 0 0;
+			}
+			/* transform 实现4 边框 */
+			.test4{
+				position: relative;
+				margin-top: 10px;
+				border:none;
+				background: #c0ebd7;
+			}
+			.test4:after{
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				border: 1px solid #000;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				width: 200%;
+				height: 200%;
+				-webkit-transform: scale(0.5);
+				transform: scale(0.5);
+				transform-origin: left top;
+				-webkit-transform-origin: left top;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class='div pixel'></div>
+			<div class='div pixel-shadow'></div>
+			<div class='div test3'></div>
+			<div class='div test4'></div>
+			<!--
+				相关参考
+			-->
+			<a href="http://www.cnblogs.com/lhb25/p/seven-method-for-1px-retina-screen.html" target="_blank">7种方法实现移动端Retina屏幕1px边框效果</a>
+		</div>
+		<script>
+			if(window.devicePixelRatio && window.devicePixelRatio >=2 ){
+				console.log(window.devicePixelRatio)
+			//	document.querySelector('.pixel').style.borderWidth = '.5px';
+				document.querySelector('.pixel').className = 'div pixel pixel_light';
+			}
+		</script>
+	</body>
+</html>
